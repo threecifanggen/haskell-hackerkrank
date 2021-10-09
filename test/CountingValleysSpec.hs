@@ -1,10 +1,8 @@
 module CountingValleysSpec where
 
-import Test.Hspec
-import Test.QuickCheck
-import Control.Exception
+import Test.Hspec ( hspec, describe, it, shouldBe )
 
-import CountingValleys
+import CountingValleys ( countingValleys )
 
 
 main :: IO ()

@@ -4,5 +4,6 @@ module FilterArray (
 
 f :: Int -> [Int] -> [Int]
 f n [] = []
-f n (x:xs) | x < n = x:(f n xs)
-           | x >= n = (f n xs)
+f n (x:xs) | x < n = x : f n xs
+           | x >= n = f n xs
+f _ _ = []

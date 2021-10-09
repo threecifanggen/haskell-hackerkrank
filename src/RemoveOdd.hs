@@ -1,6 +1,6 @@
 module RemoveOdd (f) where
 
 f :: [Int] -> [Int]
-f lst = map (\x -> (snd x)) $ 
-    filter (\x -> (mod (fst x) 2 == 0)) $ 
+f lst = map snd $ 
+    filter (even.fst) $ 
     zip [1..] lst
