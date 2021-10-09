@@ -1,6 +1,6 @@
 module PlusMinus where
 
-import GHC.Enum()
+-- import GHC.Enum()
 
-plusMinus :: [Int] -> [[Char]]
-plusMinus arr = map toEnum arr
+-- plusMinus :: [Int] -> [[Char]]
+-- plusMinus arr = map toEnum arr

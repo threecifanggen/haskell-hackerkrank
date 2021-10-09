@@ -2,7 +2,7 @@ name:                test-haskell-stack
 version:             0.1.0.0
 github:              "githubuser/test-haskell-stack"
 license:             BSD3
-author:              "Author name here"
+author:              "3gee"
 maintainer:          "example@example.com"
 copyright:           "2020 Author name here"
 

@@ -4,3 +4,6 @@ dist-newstyle/*
 *~
 *.log
 *.cabal
+.metals
+.history
+.vscode

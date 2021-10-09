@@ -5,8 +5,7 @@ module HelloWorldNTimes (
 
 nHelloWorld :: Int -> [[Char]]
 nHelloWorld 0 = []
-nHelloWorld n = map (\_ -> "Hello World") [1..n]
-
+nHelloWorld n = map (const "Hello World") [1..n]
 
 
 main :: IO()
