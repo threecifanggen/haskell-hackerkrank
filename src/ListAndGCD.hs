@@ -4,10 +4,12 @@ module ListAndGCD
         maxTuple,
         maxTupleCheck,
         checkGCD,
-        reduceCheckTwo
+        reduceCheckTwo,
+        chunksTwoTuple,
+        listAndGCD,
+        stringGCD
     ) where
 import GHC.Read (list)
-import System.Posix.Internals (newFilePath)
 
 chunks :: Int -> [a] -> [[a]]
 chunks _ [] = []
@@ -17,6 +19,12 @@ chunks n xs =
 
 chunksTwo :: [a] -> [[a]]
 chunksTwo = chunks 2
+
+chunksListToTuple :: [[a]] -> [(a, a)]
+chunksListToTuple = map (\x -> (head x, x!!1))
+
+chunksTwoTuple :: [a] -> [(a, a)]
+chunksTwoTuple = chunksListToTuple. chunksTwo
 
 maxTuple :: (Int, Int) -> (Int, Int) -> (Int, Int)
 maxTuple x y 
@@ -29,12 +37,12 @@ maxTupleCheck :: (Int, Int) -> (Int, Int) -> String
 maxTupleCheck x y 
     | fst x > fst y = "left"
     | fst x == fst y = "equal"
-    | fst y < fst x = "right"
+    | fst x < fst y = "right"
     | otherwise = "other"
 
 checkGCD :: (Int, Int) -> (Int, Int) -> [(Int, Int)]
 checkGCD (x1, x2) (y1, y2)
-    | x1 == x2 = [(x1, min x2 y2)]
+    | x1 == y1 = [(x1, min x2 y2)]
     | otherwise = []
 
 reduceCheckTwo :: [(Int, Int)] -> [(Int, Int)] -> [(Int, Int)]
@@ -50,3 +58,15 @@ reduceCheckTwo (xh:xt) (yh:yt) = let res = checkGCD xh yh
     )
 reduceCheckTwo _ _ = []
 
+listAndGCD :: [[Int]] -> [(Int, Int)]
+listAndGCD (xs:ys) =  foldl (\ x y -> reduceCheckTwo x (chunksTwoTuple y)) (chunksTwoTuple xs) ys
+listAndGCD _ = error "Length must be longer than 1"
+
+stringGCDHelper :: [(Int, Int)] -> String
+stringGCDHelper (xs:ys) = show (fst xs) ++ " " ++ show (snd xs) ++ " " ++ stringGCD ys
+stringGCDHelper _ = ""
+
+stringGCD :: [(Int, Int)] -> String
+stringGCD xs = case stringGCDHelper xs of
+    "" -> ""
+    xxs -> take ((length xxs) - 1) xxs
